@@ -5,7 +5,6 @@ import com.matheuscustodio.workshopspringmongodb.dto.UserDTO;
 import com.matheuscustodio.workshopspringmongodb.repository.UserRepository;
 import com.matheuscustodio.workshopspringmongodb.services.exception.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -36,5 +35,16 @@ public class UserService {
     public void delete(String id){
         findById(id);
         repo.deleteById(id);
+    }
+
+    public User update(User obj){
+        User newObj = findById(obj.getId());
+        updateData(newObj, obj);
+        return repo.save(newObj);
+    }
+
+    private void updateData(User newObj, User obj){
+        newObj.setEmail(obj.getEmail());
+        newObj.setName(obj.getName());
     }
 }

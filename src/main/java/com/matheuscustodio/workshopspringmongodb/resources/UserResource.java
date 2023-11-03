@@ -10,7 +10,6 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(value = "/users")
@@ -46,5 +45,12 @@ public class UserResource {
         return ResponseEntity.noContent().build();
     }
 
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<Void> update(@PathVariable String id, @RequestBody UserDTO dto){
+        User obj = service.fromDTO(dto);
+        obj.setId(id);
+        obj = service.update(obj);
+        return ResponseEntity.noContent().build();
+    }
 
 }
