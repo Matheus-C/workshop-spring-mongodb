@@ -1,5 +1,6 @@
 package com.matheuscustodio.workshopspringmongodb.resources;
 
+import com.matheuscustodio.workshopspringmongodb.domain.Post;
 import com.matheuscustodio.workshopspringmongodb.domain.User;
 import com.matheuscustodio.workshopspringmongodb.dto.UserDTO;
 import com.matheuscustodio.workshopspringmongodb.services.UserService;
@@ -51,6 +52,12 @@ public class UserResource {
         obj.setId(id);
         obj = service.update(obj);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping(value = "/{id}/posts")
+    public ResponseEntity<List<Post>> getPosts(@PathVariable String id){
+        User obj = service.findById(id);
+        return ResponseEntity.ok().body(obj.getPosts());
     }
 
 }
