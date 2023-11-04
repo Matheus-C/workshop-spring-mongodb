@@ -6,6 +6,7 @@ import com.matheuscustodio.workshopspringmongodb.services.exception.ObjectNotFou
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,5 +22,9 @@ public class PostService {
 
     public List<Post> findByTitle(String text){
         return repo.searchByTitle(text);
+    }
+
+    public List<Post> fullSearch(String text, LocalDate min, LocalDate max){
+        return repo.fullSearch(text, min, max);
     }
 }
